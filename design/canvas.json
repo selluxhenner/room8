@@ -1,0 +1,15 @@
+{
+  "artboards": [
+    { "file": "Brand.dc.html", "title": "Brand", "x": 0, "y": 0, "w": 960, "h": 660 },
+    { "file": "Main.dc.html", "title": "Swipe", "x": 0, "y": 860, "w": 375, "h": 812 },
+    { "file": "Groups.dc.html", "title": "Groups", "x": 475, "y": 860, "w": 375, "h": 812 },
+    { "file": "GroupDetail.dc.html", "title": "Group detail", "x": 950, "y": 860, "w": 375, "h": 812 },
+    { "file": "InProgress.dc.html", "title": "In progress", "x": 1425, "y": 860, "w": 375, "h": 812 },
+    { "file": "Profile.dc.html", "title": "Profile", "x": 1900, "y": 860, "w": 375, "h": 812 },
+    { "file": "EmptyState.dc.html", "title": "Swipe, empty", "x": 2375, "y": 860, "w": 375, "h": 812 }
+  ],
+  "annotations": [
+    { "id": "brief", "x": 1040, "y": 40, "w": 300, "text": "room8 - you swipe on households, not people.\n\nRules baked in:\n- Brass = one genuine moment per screen\n- Green = structure and nav only\n- No gradients, warm shadows, flat paper\n- Residential vocabulary, no dating language" }
+  ],
+  "launch": { "view": "canvas" }
+}

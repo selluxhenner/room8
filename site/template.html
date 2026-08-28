@@ -1,0 +1,1074 @@
+<title>room8</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=DM+Sans:wght@400;500;700&display=swap">
+
+<style>
+/* ------------------------------------------------------------------ tokens */
+:root{
+  --plaster:#F6F1E9; --chalk:#FFFCF7; --basalt:#20211E; --door:#2F5D50;
+  --brass:#D89A3C; --terra:#B4654A; --grey:#98A6A2; --slate:#6E7C77;
+  --hair:rgba(152,166,162,.35); --hair-2:rgba(152,166,162,.6);
+  --serif:'Fraunces',Georgia,'Times New Roman',serif;
+  --sans:'DM Sans','Segoe UI',system-ui,-apple-system,sans-serif;
+  --lift:0 12px 32px rgba(32,33,30,.08);
+  --pad:clamp(20px,5vw,64px);
+  --ps:1;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+body{
+  margin:0; background:var(--plaster); color:var(--basalt);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%; display:block}
+button{font:inherit; color:inherit; background:none; border:0; cursor:pointer; text-align:inherit}
+a{color:var(--door); text-decoration:none}
+a:hover{color:var(--basalt)}
+::selection{background:var(--brass); color:var(--basalt)}
+:focus-visible{outline:2px solid var(--door); outline-offset:2px; border-radius:4px}
+
+.wrap{max-width:1180px; margin:0 auto; padding:0 var(--pad)}
+.serif{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; line-height:1.06}
+h1,h2,h3{text-wrap:balance}
+.label{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em}
+.meta{font-size:12px; color:var(--grey)}
+.tnum{font-variant-numeric:tabular-nums lining-nums}
+
+/* --------------------------------------------------------------------- nav */
+.nav{position:sticky; top:0; z-index:60; background:rgba(246,241,233,.88);
+  backdrop-filter:saturate(140%) blur(12px); border-bottom:1px solid transparent; transition:border-color .25s ease}
+.nav.stuck{border-bottom-color:var(--hair)}
+.nav-in{display:flex; align-items:center; gap:28px; height:72px}
+.nav-logo{height:26px; width:auto; flex:none}
+.nav-links{display:flex; gap:26px; margin-left:auto; align-items:center}
+.nav-links a{font-size:14px; color:var(--slate); font-weight:500}
+.nav-links a:hover{color:var(--basalt)}
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; height:46px; padding:0 22px;
+  border-radius:12px; font-size:14px; font-weight:700; transition:transform .15s ease, background .2s, color .2s, border-color .2s}
+.btn:active{transform:translateY(1px)}
+.btn-dark{background:var(--basalt); color:var(--chalk)}
+.btn-dark:hover{background:#000; color:var(--chalk)}
+.btn-ghost{border:1px solid var(--hair-2); color:var(--slate)}
+.btn-ghost:hover{border-color:var(--basalt); color:var(--basalt)}
+.btn-sm{height:40px; padding:0 18px; font-size:13px}
+
+/* -------------------------------------------------------------------- hero */
+.hero{padding:clamp(36px,6vw,80px) 0 clamp(44px,6vw,88px)}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:clamp(32px,5vw,72px); align-items:center}
+.eyebrow{display:flex; align-items:center; gap:10px; color:var(--slate)}
+.eyebrow .dot{width:6px; height:6px; border-radius:50%; background:var(--brass); flex:none}
+h1.hero-h{font-size:clamp(40px,6.2vw,76px); margin:20px 0 0}
+h1.hero-h em{font-style:normal; color:var(--door)}
+.hero-sub{font-size:clamp(16px,1.5vw,19px); color:var(--slate); max-width:30em; margin:22px 0 0}
+.hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:32px}
+.hero-facts{display:flex; flex-wrap:wrap; gap:26px 40px; margin-top:44px; padding-top:26px; border-top:1px solid var(--hair)}
+.hero-facts > div{max-width:15em}
+.fact-n{font-family:var(--serif); font-weight:600; letter-spacing:-.04em; font-size:21px; line-height:1.15}
+.fact-l{font-size:13px; color:var(--slate); margin-top:5px; line-height:1.45}
+
+/* ------------------------------------------------------------------ device */
+.device-wrap{width:calc(395px * var(--ps)); height:calc(832px * var(--ps)); flex:none; position:relative}
+.device{width:395px; height:832px; transform:scale(var(--ps)); transform-origin:top left;
+  background:var(--basalt); border-radius:46px; padding:10px; position:relative;
+  box-shadow:0 30px 70px rgba(32,33,30,.22), 0 2px 0 rgba(255,255,255,.12) inset}
+.device::after{content:""; position:absolute; top:19px; left:50%; transform:translateX(-50%);
+  width:74px; height:5px; border-radius:3px; background:rgba(255,252,247,.16)}
+.screen{width:375px; height:812px; border-radius:38px; overflow:hidden; position:relative;
+  background:var(--plaster); color:var(--basalt); display:flex; flex-direction:column}
+.device-hint{position:absolute; left:0; right:0; bottom:-32px; text-align:center; font-size:12px; color:var(--grey)}
+.device-hint kbd{font-family:var(--sans); font-size:11px; border:1px solid var(--hair-2);
+  border-radius:5px; padding:1px 5px; color:var(--slate)}
+
+.app-top{display:flex; align-items:center; justify-content:space-between; padding:20px 20px 12px; flex:none}
+.app-logo{display:flex; align-items:baseline; gap:2px}
+.app-logo b{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:24px}
+.app-logo i{font-family:var(--serif); font-style:normal; font-weight:600; letter-spacing:-.05em; font-size:28px; color:var(--door)}
+.seg{display:flex; align-items:baseline; gap:14px}
+.seg button{font-size:14px; color:var(--grey); padding-bottom:3px; border-bottom:2px solid transparent}
+.seg button.on{color:var(--basalt); font-weight:700; border-bottom-color:var(--door)}
+.app-scroll{flex:1; min-height:0; overflow-y:auto; overscroll-behavior:contain; scrollbar-width:none; padding:0 20px}
+.app-scroll::-webkit-scrollbar{display:none}
+.h-screen{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:34px; line-height:1.06}
+
+.tabbar{display:flex; height:72px; border-top:1px solid var(--hair); padding-bottom:10px; flex:none; background:var(--plaster)}
+.tabbar button{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:var(--grey)}
+.tabbar button.on{color:var(--door)}
+.tabbar span{font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.12em}
+
+/* -------------------------------------------------------------- swipe deck */
+.deck{flex:1; min-height:0; position:relative; padding:0 16px}
+.deck-ghost{position:absolute; left:28px; right:28px; top:-8px; height:30px;
+  background:var(--chalk); border:1px solid var(--hair); border-radius:20px}
+.card{position:absolute; inset:0 16px; background:var(--chalk); border-radius:20px; box-shadow:var(--lift);
+  overflow:hidden; display:flex; flex-direction:column; touch-action:pan-y; user-select:none; will-change:transform}
+.card.behind{pointer-events:none; box-shadow:0 6px 18px rgba(32,33,30,.07)}
+.card.top{cursor:grab}
+.card.top.drag{cursor:grabbing}
+.card.settle{transition:transform .34s cubic-bezier(.2,.7,.3,1)}
+.card.gone{transition:transform .38s cubic-bezier(.4,0,.6,1), opacity .38s ease; opacity:0}
+.card-photo{position:relative; height:268px; flex:none; background:var(--grey)}
+.card-photo img{width:100%; height:100%; object-fit:cover}
+.doorbells{position:absolute; left:16px; bottom:14px; display:flex; gap:7px}
+.doorbells img{width:46px; height:46px; border-radius:12px; object-fit:cover; border:2px solid var(--chalk)}
+.doorbells .open{width:46px; height:46px; border-radius:12px; border:2px dashed rgba(255,252,247,.85);
+  display:grid; place-items:center; color:var(--chalk); font-size:19px}
+.stamp{position:absolute; top:0; bottom:0; width:46px; display:grid; place-items:center; opacity:0; pointer-events:none}
+.stamp .pill{writing-mode:vertical-rl; background:var(--chalk); border-radius:8px; padding:11px 5px;
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em}
+.stamp.yes{right:0; background:rgba(47,93,80,.22); border-left:2px solid var(--door)}
+.stamp.yes .pill{color:var(--door)}
+.stamp.no{left:0; background:rgba(152,166,162,.24); border-right:2px solid var(--grey)}
+.stamp.no .pill{color:var(--slate)}
+.card-body{padding:18px 20px 20px; display:flex; flex-direction:column; flex:1; min-height:0}
+.card-title{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:28px; line-height:1.1; margin:0}
+.rent{display:flex; align-items:baseline; gap:8px; margin-top:14px}
+.rent b{font-family:var(--serif); font-weight:600; font-size:30px; border-bottom:3px solid var(--brass); padding-bottom:2px}
+.traits{display:flex; flex-wrap:wrap; gap:7px; margin-top:16px}
+.traits .t{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; color:var(--slate)}
+.traits .t.hit{color:var(--terra)}
+.traits .sep{font-size:11px; color:var(--grey)}
+.card-note{margin:auto 0 0; font-size:14px; line-height:1.5; color:var(--slate); border-top:1px solid var(--hair); padding-top:14px}
+.deck-actions{display:flex; gap:10px; padding:14px 16px; flex:none}
+.deck-actions button{flex:1; height:48px; border-radius:12px; font-size:14px; font-weight:700}
+.deck-actions .pass{border:1px solid var(--hair-2); color:var(--slate)}
+.deck-actions .yes{background:var(--basalt); color:var(--chalk)}
+
+.empty{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0 32px; text-align:center}
+.empty h3{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:30px; line-height:1.1; margin:26px 0 0}
+.empty p{color:var(--slate); font-size:15px; line-height:1.5; margin:12px 0 0}
+.empty .acts{display:flex; flex-direction:column; gap:12px; width:100%; margin-top:30px}
+.empty .acts button{height:52px; border-radius:12px; font-size:15px; font-weight:700}
+
+/* -------------------------------------------------------------- group list */
+.g-row{display:flex; gap:14px; padding:18px 0; width:100%; align-items:stretch}
+.g-row+.g-row,.housed{border-top:1px solid var(--hair)}
+.g-row img.thumb{width:104px; height:104px; border-radius:16px; object-fit:cover; flex:none}
+.g-main{flex:1; min-width:0; display:flex; flex-direction:column}
+.g-name{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:21px; line-height:1.15}
+.badge{background:var(--brass); color:var(--basalt); border-radius:8px; padding:3px 7px; font-size:11px;
+  font-weight:700; text-transform:uppercase; letter-spacing:.12em; display:inline-block}
+.badge.quiet{background:transparent; color:var(--door); border:1px solid var(--door); padding:2px 6px}
+.g-foot{display:flex; align-items:center; justify-content:space-between; margin-top:auto; gap:10px}
+.faces{display:flex; gap:5px}
+.faces img{width:30px; height:30px; border-radius:9px; object-fit:cover}
+.faces .open{width:30px; height:30px; border-radius:9px; border:1.5px dashed var(--grey); display:grid; place-items:center; color:var(--grey); font-size:14px}
+.faces .ini{width:30px; height:30px; border-radius:9px; background:#EAD5CB; display:grid; place-items:center; font-weight:700; font-size:11px; color:var(--terra)}
+.g-rent{font-family:var(--serif); font-weight:600; font-size:19px}
+.housed{display:flex; align-items:center; justify-content:space-between; padding:16px 0; width:100%; font-size:14px; color:var(--grey)}
+
+/* ------------------------------------------------------------ group detail */
+.d-hero{position:relative; height:200px; flex:none; background:var(--grey)}
+.d-hero img{width:100%; height:100%; object-fit:cover}
+.back{position:absolute; top:16px; left:16px; width:44px; height:44px; border-radius:12px;
+  background:var(--chalk); display:grid; place-items:center; box-shadow:var(--lift)}
+.d-head{display:flex; align-items:flex-end; justify-content:space-between; gap:12px; padding-top:16px}
+.member{display:flex; align-items:center; gap:14px; padding:9px 0}
+.member img{width:44px; height:44px; border-radius:12px; object-fit:cover; flex:none}
+.member .who{flex:1; min-width:0}
+.member .who b{font-size:15px; font-weight:700; display:block}
+.answer{background:var(--brass); color:var(--basalt); border-radius:10px; padding:9px 14px;
+  font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em; flex:none}
+.answer.done{background:transparent; color:var(--door); border:1px solid var(--door); cursor:default}
+.sect{padding:16px 0; border-top:1px solid var(--hair)}
+.sect-h{display:flex; align-items:baseline; justify-content:space-between; gap:10px}
+.sect-h .label{color:var(--grey)}
+.bar{height:6px; border-radius:3px; background:rgba(152,166,162,.3); overflow:hidden; margin-top:10px}
+.bar i{display:block; height:100%; background:var(--door); border-radius:3px; transition:width .5s cubic-bezier(.2,.7,.3,1)}
+
+/* ------------------------------------------------------------- in progress */
+.ptabs{display:flex; gap:22px; border-bottom:1px solid var(--hair); margin-top:12px}
+.ptabs button{font-size:15px; color:var(--grey); padding-bottom:10px; border-bottom:2px solid transparent; margin-bottom:-1px}
+.ptabs button.on{color:var(--basalt); font-weight:700; border-bottom-color:var(--door)}
+.a-row{display:flex; gap:16px; padding:18px 0; border-bottom:1px solid var(--hair)}
+.a-row img{width:84px; height:84px; border-radius:14px; object-fit:cover; flex:none}
+.a-name{font-size:17px; font-weight:700}
+.status{font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.12em}
+.status.warm{background:var(--brass); color:var(--basalt); border-radius:9px; padding:6px 10px; display:inline-block}
+.status.grey{color:var(--slate)}
+.status.dead{color:var(--terra)}
+.msg{display:flex; gap:14px; align-items:flex-start; padding:12px 0}
+.msg img{width:44px; height:44px; border-radius:12px; object-fit:cover; flex:none}
+
+/* ----------------------------------------------------------------- profile */
+.p-head{display:flex; gap:16px; align-items:center; padding-top:6px}
+.p-head img{width:88px; height:88px; border-radius:18px; object-fit:cover; flex:none}
+.verified{display:flex; align-items:center; gap:6px; color:var(--door); font-weight:700; font-size:14px}
+.row-link{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 0;
+  border-top:1px solid var(--hair); width:100%; font-size:16px}
+.toggle{width:56px; height:32px; border-radius:16px; background:var(--door); position:relative; transition:background .2s; flex:none}
+.toggle i{position:absolute; top:4px; left:28px; width:24px; height:24px; border-radius:50%;
+  background:var(--chalk); transition:left .2s cubic-bezier(.2,.7,.3,1)}
+.toggle.off{background:rgba(152,166,162,.55)}
+.toggle.off i{left:4px}
+
+.toast{position:absolute; left:16px; right:16px; bottom:88px; background:var(--basalt); color:var(--chalk);
+  border-radius:12px; padding:13px 16px; font-size:13px; opacity:0; transform:translateY(8px);
+  transition:opacity .25s ease, transform .25s ease; pointer-events:none; z-index:5}
+.toast.show{opacity:1; transform:none}
+.toast b{color:var(--brass); font-weight:700}
+
+/* ---------------------------------------------------------------- sections */
+section{scroll-margin-top:84px}
+.band{padding:clamp(52px,7vw,96px) 0; border-top:1px solid var(--hair)}
+.sec-head{max-width:46ch}
+.sec-head .label{color:var(--grey)}
+.sec-head h2{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; line-height:1.06;
+  font-size:clamp(32px,4.2vw,52px); margin:14px 0 0}
+.sec-head p{color:var(--slate); font-size:17px; margin:16px 0 0}
+
+.steps{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); margin-top:52px}
+.step{padding:26px 26px 0 0; border-top:2px solid var(--basalt)}
+.step+.step{padding-left:26px; border-left:1px solid var(--hair)}
+.step .n{font-family:var(--serif); font-weight:600; font-size:15px; color:var(--brass)}
+.step h3{font-size:19px; margin:12px 0 0; font-weight:700}
+.step p{font-size:14px; color:var(--slate); margin:8px 0 0}
+
+.feat{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:clamp(32px,6vw,80px);
+  align-items:center; padding:clamp(44px,6vw,76px) 0}
+.feat+.feat{border-top:1px solid var(--hair)}
+.feat.flip .feat-shot{order:-1}
+.feat h3{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:clamp(27px,3.4vw,40px); line-height:1.08; margin:14px 0 0}
+.feat > div > p{color:var(--slate); font-size:16px; margin:16px 0 0}
+.feat ul{list-style:none; margin:24px 0 0; padding:0}
+.feat li{display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--hair); font-size:15px}
+.feat li svg{flex:none; margin-top:4px}
+.feat li b{font-weight:700}
+.feat li span{color:var(--slate)}
+.shot{border-radius:30px; overflow:hidden; background:var(--basalt); padding:8px;
+  box-shadow:0 24px 56px rgba(32,33,30,.16); max-width:308px; margin:0 auto}
+.shot img{border-radius:24px; width:100%}
+.feat-shot{display:flex; justify-content:center}
+
+.gallery{display:flex; gap:24px; overflow-x:auto; padding:44px 4px 14px; scroll-snap-type:x proximity}
+.gallery::-webkit-scrollbar{height:8px}
+.gallery::-webkit-scrollbar-thumb{background:var(--hair-2); border-radius:4px}
+.g-item{flex:none; width:248px; scroll-snap-align:center}
+.g-item .shot{max-width:none; transition:transform .25s ease}
+.g-item:hover .shot,.g-item:focus-visible .shot{transform:translateY(-6px)}
+.g-item .shot img{cursor:zoom-in}
+.g-cap{margin-top:16px}
+.g-cap b{display:block; font-size:15px}
+.g-cap span{font-size:13px; color:var(--grey)}
+
+.swatches{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:14px; margin-top:44px}
+.sw .chip{height:66px; border-radius:12px; border:1px solid var(--hair-2)}
+.sw .label{margin-top:9px}
+.brand-shot{margin-top:44px; border-radius:20px; overflow:hidden; border:1px solid var(--hair); box-shadow:var(--lift)}
+.rules{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:48px}
+.rules div{padding:22px 26px 0 0; border-top:1px solid var(--hair)}
+.rules div+div{padding-left:26px; border-left:1px solid var(--hair)}
+.rules b{display:block; font-size:16px}
+.rules p{font-size:14px; color:var(--slate); margin:8px 0 0}
+
+.cta{text-align:center; padding:clamp(60px,8vw,110px) 0}
+.cta h2{font-family:var(--serif); font-weight:600; letter-spacing:-.05em; font-size:clamp(34px,5.4vw,64px);
+  line-height:1.05; margin:0 auto; max-width:16ch}
+.cta p{color:var(--slate); font-size:17px; margin:20px auto 0; max-width:42ch}
+.waitlist{display:flex; gap:10px; justify-content:center; margin-top:34px; flex-wrap:wrap}
+.waitlist input{height:52px; width:min(320px,100%); padding:0 18px; border-radius:12px; background:var(--chalk);
+  border:1px solid var(--hair-2); font:inherit; font-size:15px; color:var(--basalt)}
+.waitlist input:focus-visible{outline:2px solid var(--door); outline-offset:1px; border-color:transparent}
+.waitlist .btn{height:52px}
+.note{font-size:13px; color:var(--grey); margin-top:16px}
+
+footer{border-top:1px solid var(--hair); padding:40px 0 56px}
+.foot{display:flex; align-items:center; gap:20px; flex-wrap:wrap}
+.foot img{height:22px; width:auto}
+.foot .sp{margin-left:auto; font-size:13px; color:var(--grey)}
+
+.lb{position:fixed; inset:0; z-index:100; background:rgba(32,33,30,.88); display:none;
+  align-items:center; justify-content:center; padding:28px; backdrop-filter:blur(6px)}
+.lb.open{display:flex}
+.lb img{max-height:86vh; width:auto; border-radius:24px; box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.lb .close{position:absolute; top:20px; right:24px; color:var(--chalk); font-size:14px; font-weight:700; letter-spacing:.06em}
+
+.rev{opacity:0; transform:translateY(18px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1)}
+.rev.in{opacity:1; transform:none}
+
+@media (max-width:1080px){ :root{--ps:.86} .hero-grid{gap:36px} }
+@media (max-width:900px){
+  :root{--ps:1}
+  .hero-grid{grid-template-columns:minmax(0,1fr)}
+  .device-wrap{margin:8px auto 0}
+  .feat{grid-template-columns:minmax(0,1fr); gap:36px}
+  .feat.flip .feat-shot{order:0}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step:nth-child(3){padding-left:0; border-left:0}
+  .rules{grid-template-columns:minmax(0,1fr)}
+  .rules div+div{padding-left:0; border-left:0; margin-top:22px}
+  .swatches{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media (max-width:640px){
+  .nav-links a:not(.btn){display:none}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .step{padding-left:0 !important; border-left:0 !important}
+  .swatches{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:460px){ :root{--ps:.85} }
+@media (max-width:400px){ :root{--ps:.74} }
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms !important; transition-duration:.01ms !important}
+  .rev{opacity:1; transform:none}
+}
+</style>
+
+<div class="nav" id="nav"><div class="wrap nav-in">
+  <a href="#top"><img class="nav-logo" src="{{LOGO}}" alt="room8"></a>
+  <nav class="nav-links">
+    <a href="#how">How it works</a>
+    <a href="#inside">Inside the app</a>
+    <a href="#screens">Screens</a>
+    <a href="#design">Design</a>
+    <a class="btn btn-dark btn-sm" href="#join">Join the waitlist</a>
+  </nav>
+</div></div>
+
+<header class="hero" id="top"><div class="wrap hero-grid">
+  <div>
+    <p class="eyebrow label"><span class="dot"></span> Berlin flatshares &middot; private beta</p>
+    <h1 class="hero-h serif">You swipe on households, <em>not people.</em></h1>
+    <p class="hero-sub">Every card is a doorway into a home that already exists &mdash; the room, the warm rent, the people and the house rules &mdash; before you write a single message.</p>
+    <div class="hero-cta">
+      <a class="btn btn-dark" href="#demo">Try the demo</a>
+      <a class="btn btn-ghost" href="#screens">See every screen</a>
+    </div>
+    <div class="hero-facts">
+      <div>
+        <div class="fact-n">Households first</div>
+        <div class="fact-l">You see the people you would actually live with, not a stranger&rsquo;s headshot.</div>
+      </div>
+      <div>
+        <div class="fact-n">Rules up front</div>
+        <div class="fact-l">Cleaning rota, quiet hours and guests, agreed before anyone applies.</div>
+      </div>
+      <div>
+        <div class="fact-n">Private by default</div>
+        <div class="fact-l">Your documents are shared only inside an application you approve.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="device-wrap" id="demo">
+    <div class="device">
+      <div class="screen" id="screen" role="application" aria-label="room8 interactive preview"></div>
+    </div>
+    <p class="device-hint">Drag a card, or press <kbd>&larr;</kbd> <kbd>&rarr;</kbd> &mdash; every tab works</p>
+  </div>
+</div></header>
+
+<section class="band" id="how"><div class="wrap">
+  <div class="sec-head rev">
+    <p class="label">How it works</p>
+    <h2>Four steps from a card to a set of keys.</h2>
+    <p>room8 matches you to a household, then keeps the whole application in one place instead of nine chat threads and a shared folder.</p>
+  </div>
+  <div class="steps rev">
+    <div class="step">
+      <div class="n">01</div>
+      <h3>Swipe on a home</h3>
+      <p>A card is a room, a warm rent and a doorbell panel of the people already living there. A dashed square is an open spot.</p>
+    </div>
+    <div class="step">
+      <div class="n">02</div>
+      <h3>Ask to join</h3>
+      <p>Interest goes to the household, not to one person. They answer as a group, so nobody is left guessing.</p>
+    </div>
+    <div class="step">
+      <div class="n">03</div>
+      <h3>Agree the house rules</h3>
+      <p>Rota, quiet hours, guests, smoking. Everyone signs off before a single document leaves your phone.</p>
+    </div>
+    <div class="step">
+      <div class="n">04</div>
+      <h3>Apply together</h3>
+      <p>One readiness bar shows what the landlord is still missing. Viewings and answers land in In&nbsp;progress.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="band" id="inside"><div class="wrap">
+  <div class="sec-head rev">
+    <p class="label">Inside the app</p>
+    <h2>Five screens, and nothing that a hairline could not do instead.</h2>
+    <p>Real screenshots from the build. Green carries structure, brass appears once per screen, and the room does the emotional work.</p>
+  </div>
+
+  <div class="feat rev">
+    <div>
+      <p class="label" style="color:var(--brass)">The card</p>
+      <h3>The room does the talking.</h3>
+      <p>Photo first, then the facts in the order you actually ask for them: where, when, how much, who, and why this household thinks you fit.</p>
+      <ul>
+        <li>{{TICK}}<span><b>Doorbell panel.</b> Members sit over the photo as square tiles, one dashed square per open spot.</span></li>
+        <li>{{TICK}}<span><b>Warm rent, tabular.</b> One brass underline per screen &mdash; the only decoration on the card.</span></li>
+        <li>{{TICK}}<span><b>Habits, not hashtags.</b> Tidy-ish, quiet weekdays, guests welcome. Terracotta marks the ones you share.</span></li>
+      </ul>
+    </div>
+    <div class="feat-shot"><div class="shot"><img src="{{SHOT_SWIPE}}" alt="The room8 swipe screen showing the Kastanienallee 12 household card" loading="lazy"></div></div>
+  </div>
+
+  <div class="feat flip rev">
+    <div>
+      <p class="label" style="color:var(--brass)">Groups</p>
+      <h3>The group is the unit, not the room.</h3>
+      <p>Every household you are part of, applying to, or still deciding about, in one list &mdash; with the money and the open spots visible at a glance.</p>
+      <ul>
+        <li>{{TICK}}<span><b>Live status.</b> Searching, applying, one spot left, housed in June.</span></li>
+        <li>{{TICK}}<span><b>Faces, not counts.</b> You always know who is in the room before you tap in.</span></li>
+        <li>{{TICK}}<span><b>Start your own.</b> Two friends and an empty spot is already a household on room8.</span></li>
+      </ul>
+    </div>
+    <div class="feat-shot"><div class="shot"><img src="{{SHOT_GROUPS}}" alt="The room8 groups list with three households and their rents" loading="lazy"></div></div>
+  </div>
+
+  <div class="feat rev">
+    <div>
+      <p class="label" style="color:var(--brass)">Group detail</p>
+      <h3>The awkward conversation, already had.</h3>
+      <p>The house agreement is a screen, not a hope. Requests to join get a single Answer button, and the readiness bar names exactly what is missing.</p>
+      <ul>
+        <li>{{TICK}}<span><b>House agreement.</b> Rota, quiet after 22:00, guests with a heads-up &mdash; agreed by all three.</span></li>
+        <li>{{TICK}}<span><b>Application readiness.</b> 4 of 6, and it tells you whose income proof is still outstanding.</span></li>
+        <li>{{TICK}}<span><b>One chat per household.</b> Not one chat per person you swiped.</span></li>
+      </ul>
+    </div>
+    <div class="feat-shot"><div class="shot"><img src="{{SHOT_DETAIL}}" alt="The room8 group detail screen for Boxhagener 24 with members and house agreement" loading="lazy"></div></div>
+  </div>
+
+  <div class="feat flip rev">
+    <div>
+      <p class="label" style="color:var(--brass)">In progress</p>
+      <h3>Everything in flight, on one page.</h3>
+      <p>Applications, conversations and viewings stop living in your inbox. Sent, answered, invited, expired &mdash; each one says what happens next.</p>
+      <ul>
+        <li>{{TICK}}<span><b>Viewing invited.</b> The one brass moment on the screen, with the day and the time.</span></li>
+        <li>{{TICK}}<span><b>Honest about silence.</b> &ldquo;No answer in 14 days&rdquo; is a state, and it expires cleanly.</span></li>
+        <li>{{TICK}}<span><b>Latest messages.</b> The last line from each household, nothing more.</span></li>
+      </ul>
+    </div>
+    <div class="feat-shot"><div class="shot"><img src="{{SHOT_PROGRESS}}" alt="The room8 in-progress screen with applications and latest messages" loading="lazy"></div></div>
+  </div>
+
+  <div class="feat rev">
+    <div>
+      <p class="label" style="color:var(--brass)">Profile</p>
+      <h3>Your papers stay yours.</h3>
+      <p>Preferences drive matching. Documents sit behind a lock and only travel inside an application you have approved &mdash; and you can take all of it back out again.</p>
+      <ul>
+        <li>{{TICK}}<span><b>Documents &mdash; private.</b> 3 of 5, missing proof of income and a landlord reference.</span></li>
+        <li>{{TICK}}<span><b>Verified, quietly.</b> A green check, an age, a job. No score, no ranking.</span></li>
+        <li>{{TICK}}<span><b>Export and delete.</b> Both are one tap from the bottom of your own profile.</span></li>
+      </ul>
+    </div>
+    <div class="feat-shot"><div class="shot"><img src="{{SHOT_PROFILE}}" alt="The room8 profile screen showing preferences and private documents" loading="lazy"></div></div>
+  </div>
+</div></section>
+
+<section class="band" id="screens"><div class="wrap">
+  <div class="sec-head rev">
+    <p class="label">Screens</p>
+    <h2>The whole app, end to end.</h2>
+    <p>Tap any screen to open it full size.</p>
+  </div>
+</div>
+<div class="wrap">
+  <div class="gallery rev" id="gallery">
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_SWIPE}}" alt="Swipe screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>Swipe</b><span>A household per card</span></figcaption></figure>
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_GROUPS}}" alt="Groups screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>Groups</b><span>Everything you are part of</span></figcaption></figure>
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_DETAIL}}" alt="Group detail screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>Group detail</b><span>Members, agreement, readiness</span></figcaption></figure>
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_PROGRESS}}" alt="In progress screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>In progress</b><span>Applications and viewings</span></figcaption></figure>
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_PROFILE}}" alt="Profile screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>Profile</b><span>Preferences and documents</span></figcaption></figure>
+    <figure class="g-item" style="margin:0"><div class="shot"><img src="{{SHOT_EMPTY}}" alt="Empty state screen" loading="lazy"></div>
+      <figcaption class="g-cap"><b>Empty state</b><span>Widen the area, or start a group</span></figcaption></figure>
+  </div>
+</div></section>
+
+<section class="band" id="design"><div class="wrap">
+  <div class="sec-head rev">
+    <p class="label">Design system</p>
+    <h2>Warm paper, one brass key, no gradients.</h2>
+    <p>Fraunces 600 for anything with a name, DM&nbsp;Sans for everything else. Green is structure and navigation only; brass is allowed exactly one genuine moment per screen.</p>
+  </div>
+
+  <div class="swatches rev">
+    <div class="sw"><div class="chip" style="background:#F6F1E9"></div><div class="label">Plaster</div><div class="meta tnum">#F6F1E9</div></div>
+    <div class="sw"><div class="chip" style="background:#FFFCF7"></div><div class="label">Chalk</div><div class="meta tnum">#FFFCF7</div></div>
+    <div class="sw"><div class="chip" style="background:#20211E; border-color:transparent"></div><div class="label">Basalt</div><div class="meta tnum">#20211E</div></div>
+    <div class="sw"><div class="chip" style="background:#2F5D50; border-color:transparent"></div><div class="label">Doorframe</div><div class="meta tnum">#2F5D50</div></div>
+    <div class="sw"><div class="chip" style="background:#D89A3C; border-color:transparent"></div><div class="label">Brass Key</div><div class="meta tnum">#D89A3C</div></div>
+    <div class="sw"><div class="chip" style="background:#B4654A; border-color:transparent"></div><div class="label">Terracotta</div><div class="meta tnum">#B4654A</div></div>
+    <div class="sw"><div class="chip" style="background:#98A6A2; border-color:transparent"></div><div class="label">Window Grey</div><div class="meta tnum">#98A6A2</div></div>
+  </div>
+
+  <div class="brand-shot rev"><img src="{{SHOT_BRAND}}" alt="The room8 brand sheet: logo, palette, type specimen and the doorbell row" loading="lazy"></div>
+
+  <div class="rules rev">
+    <div><b>Residential vocabulary</b><p>&ldquo;Two spots left in Neuk&ouml;lln,&rdquo; never &ldquo;New match nearby!&rdquo; Nothing in the product borrows from dating apps.</p></div>
+    <div><b>Flat paper, warm shadow</b><p>No gradients anywhere. A single soft shadow lifts the card off the plaster, and hairlines do the rest.</p></div>
+    <div><b>One brass moment</b><p>The rent underline, the spot-left badge, or the viewing invite &mdash; one per screen, never two.</p></div>
+  </div>
+</div></section>
+
+<section class="cta" id="join"><div class="wrap">
+  <h2 class="rev">Find the household, then the room.</h2>
+  <p class="rev">room8 opens in Berlin first. Leave an address and we will send an invite when your district goes live.</p>
+  <form class="waitlist rev" id="waitlist" novalidate>
+    <input type="email" id="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email">
+    <button class="btn btn-dark" type="submit">Request an invite</button>
+  </form>
+  <p class="note rev" id="wl-note">This is a design preview &mdash; the form is not connected to anything, and nothing you type is sent or stored.</p>
+</div></section>
+
+<footer><div class="wrap foot">
+  <img src="{{LOGO}}" alt="room8">
+  <span class="sp">Preview site &middot; design and screens from the room8 concept build</span>
+</div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Screenshot">
+  <button class="close" id="lb-close" type="button">Close &times;</button>
+  <img id="lb-img" alt="">
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ------------------------------------------------------------- assets */
+  var IMG = {
+    room1:"{{ROOM1}}", room2:"{{ROOM2}}", room3:"{{ROOM3}}",
+    aimee:"{{AIMEE}}", simon:"{{SIMON}}", victor:"{{VICTOR}}", kevin:"{{KEVIN}}"
+  };
+  var NAME = { aimee:"Aimee B.", simon:"Simon K.", victor:"Victor M.", kevin:"Kevin S." };
+
+  var ICON = {
+    swipe:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="7.2" r="4.2" pathLength="100" stroke-dasharray="86 14"></circle><circle cx="12" cy="16.4" r="5.2"></circle></svg>',
+    groups:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8.5" width="5.4" height="7" rx="1.8"></rect><rect x="9.8" y="8.5" width="5.4" height="7" rx="1.8"></rect><rect x="16.6" y="8.5" width="4.4" height="7" rx="1.8" stroke-dasharray="2.5 2.5"></rect></svg>',
+    progress:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3.5 11.5 L20.5 4.5 L14.5 20 L11 13.5 Z"></path><path d="M11 13.5 L20.5 4.5"></path></svg>',
+    profile:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M5 19.5 C6.2 15.8 8.8 14.2 12 14.2 C15.2 14.2 17.8 15.8 19 19.5"></path></svg>',
+    sliders:'<svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#20211E" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><circle cx="9" cy="7" r="2.4" fill="#F6F1E9"></circle><line x1="4" y1="15" x2="20" y2="15"></line><circle cx="15" cy="15" r="2.4" fill="#F6F1E9"></circle></svg>',
+    chev:'<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#98A6A2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 5 L16 12 L9.5 19"></path></svg>',
+    back:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#20211E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 5 L8 12 L14.5 19"></path></svg>',
+    check:'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2F5D50" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 L9.5 18 L20 6"></path></svg>',
+    lock:'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#98A6A2" stroke-width="1.9" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.6"></rect><path d="M8 10.5 V7.6 A4 4 0 0 1 16 7.6 V10.5"></path></svg>',
+    doorway:'<svg width="88" height="118" viewBox="0 0 88 118" fill="none" stroke="#98A6A2" stroke-width="3" stroke-linejoin="round"><rect x="13" y="4" width="62" height="106" rx="7"></rect><rect x="54" y="49" width="9" height="19" rx="4.5"></rect><line x1="4" y1="110" x2="84" y2="110" stroke-linecap="round"></line></svg>'
+  };
+
+  /* --------------------------------------------------------------- data */
+  var DECK = [
+    { id:"kastanienallee", name:"Kastanienallee 12", hood:"Prenzlauer Berg", from:"from 1 Oct", spots:1,
+      rent:640, photo:"room2", members:["aimee","simon","victor"], open:1, contact:"Victor",
+      traits:[["Tidy-ish",1],["Quiet weekdays",1],["Non-smoking",0],["Guests welcome",0]],
+      note:"You keep similar hours, and all of you want a calm weekday home with a shared dinner now and then." },
+    { id:"samariter", name:"Samariterstraße 21", hood:"Friedrichshain", from:"from 1 Nov", spots:1,
+      rent:585, photo:"room1", members:["victor","kevin"], open:1, contact:"Kevin",
+      traits:[["Cooks most days",1],["Quiet after 22:00",1],["Non-smoking",0],["Cat in the flat",0]],
+      note:"Two of you already share the kitchen rota. The open room is the quiet one facing the courtyard." },
+    { id:"wuehlisch", name:"Wühlischstraße 40", hood:"Friedrichshain", from:"from 15 Nov", spots:2,
+      rent:610, photo:"room3", members:["aimee","kevin"], open:2, contact:"Aimee",
+      traits:[["Tidy-ish",1],["Guests welcome",1],["Works from home",0],["Non-smoking",0]],
+      note:"A long kitchen table and two rooms opening at the same time, so you could move in with someone you know." },
+    { id:"oker", name:"Okerstraße 3", hood:"Neukölln", from:"from 1 Dec", spots:1,
+      rent:560, photo:"room2", members:["simon","victor","kevin"], open:1, contact:"Simon",
+      traits:[["Quiet weekdays",1],["Shared dinners",1],["Non-smoking",0],["No pets",0]],
+      note:"Three people who have lived together two years, looking for one more for the front room." }
+  ];
+
+  function makeDetail(g){
+    return {
+      agreement:"Weekly cleaning rota · quiet after 22:00 · guests with a heads-up · non-smoking",
+      agreed:"Agreed by all three",
+      ready:4, readyOf:6,
+      missing:"Aimee’s income proof and a landlord reference.",
+      chatBy:"victor", chat:"Victor: The Samariterstr. viewing is con…", chatAt:"14:02",
+      pending: g.pending || null
+    };
+  }
+
+  var GROUPS = [
+    { id:"kastanienallee", name:"Kastanienallee 12", hood:"Prenzlauer Berg", from:"from 1 Oct",
+      status:"", badge:"1 spot left", rent:640, photo:"room2",
+      members:["aimee","simon","victor"], open:1, ini:null,
+      roles:{ victor:"Contact person · joined 2 Aug", simon:"Joined 14 Aug", aimee:"You · joined 19 Aug" },
+      detail:{ agreement:"Weekly cleaning rota · quiet after 22:00 · guests with a heads-up · non-smoking",
+        agreed:"Agreed by all three", ready:5, readyOf:6, missing:"A landlord reference for Simon.",
+        chatBy:"simon", chat:"Simon: I can take the Tuesday viewing slot.", chatAt:"09:12", pending:null } },
+    { id:"weser", name:"Weserstraße 8", hood:"Neukölln", from:"from 1 Nov",
+      status:"searching", badge:"", rent:590, photo:"room1",
+      members:["victor","kevin"], open:0, ini:"JS",
+      roles:{ victor:"Contact person · joined 12 Jul", kevin:"Joined 30 Jul" },
+      detail:{ agreement:"Cleaning every Sunday · no smoking indoors · guests welcome · one shared dinner a week",
+        agreed:"Agreed by all three", ready:3, readyOf:6, missing:"Two payslips and a Schufa for Jonas.",
+        chatBy:"victor", chat:"Victor: Can you do a call on Sunday?", chatAt:"11:40", pending:null } },
+    { id:"boxhagener", name:"Boxhagener 24", hood:"Friedrichshain", from:"from 15 Oct",
+      status:"applying", badge:"", rent:710, photo:"room3",
+      members:["victor","aimee"], open:1, ini:null,
+      roles:{ victor:"Contact person · joined 2 Aug", aimee:"You · joined 19 Aug" },
+      detail:{ agreement:"Weekly cleaning rota · quiet after 22:00 · guests with a heads-up · non-smoking",
+        agreed:"Agreed by all three", ready:4, readyOf:6, missing:"Aimee’s income proof and a landlord reference.",
+        chatBy:"victor", chat:"Victor: The Samariterstr. viewing is con…", chatAt:"14:02",
+        pending:{ who:"simon", label:"Asked to join" } } }
+  ];
+
+  var APPS = [
+    { name:"Samariterstraße 21", photo:"room1", sent:"sent 21 Aug · answered 26 Aug",
+      state:"warm", tag:"Viewing invited", extra:"Thu 4 Sep · 17:30" },
+    { name:"Wühlischstraße 40", photo:"room2", sent:"sent 25 Aug",
+      state:"grey", tag:"Viewed by the landlord", extra:"" },
+    { name:"Gärtnerstraße 7", photo:"room3", sent:"sent 11 Aug · no answer in 14 days",
+      state:"dead", tag:"Expired", extra:"" }
+  ];
+  var CHATS = [
+    { who:"victor", title:"Weserstraße 8", line:"Victor: Can you do a call on Sunday?", at:"11:40" },
+    { who:"simon", title:"Simon", line:"You: Sounds good, talk tomorrow.", at:"Tue" },
+    { who:"kevin", title:"Kastanienallee 12", line:"Kevin: The rota starts the week you move in.", at:"Mon" },
+    { who:"aimee", title:"Boxhagener 24", line:"You: I uploaded my contract just now.", at:"Sun" }
+  ];
+  var VIEWINGS = [
+    { name:"Samariterstraße 21", photo:"room1", when:"Thu 4 Sep · 17:30", who:"With Victor and the landlord", state:"warm", tag:"Confirmed" },
+    { name:"Boxhagener 24", photo:"room3", when:"Sat 6 Sep · 11:00", who:"Group viewing, all four of you", state:"grey", tag:"Waiting on a time" }
+  ];
+
+  /* -------------------------------------------------------------- state */
+  var state = { tab:"swipe", seg:"groups", deck:0, detail:null, ptab:"apps", notif:true };
+  var screenEl = document.getElementById("screen");
+  var esc = function(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" })[c]; }); };
+
+  /* ------------------------------------------------------------- pieces */
+  function tabbar(){
+    var items = [["swipe","Swipe"],["groups","Groups"],["progress","In progress"],["profile","Profile"]];
+    return '<div class="tabbar">' + items.map(function(it){
+      return '<button type="button" data-tab="' + it[0] + '" class="' + (state.tab === it[0] ? "on" : "") +
+             '" aria-label="' + it[1] + '">' + ICON[it[0]] + "<span>" + it[1] + "</span></button>";
+    }).join("") + "</div>";
+  }
+
+  function faces(g){
+    var h = '<div class="faces">';
+    h += g.members.map(function(m){ return '<img src="' + IMG[m] + '" alt="' + esc(NAME[m]) + '">'; }).join("");
+    if (g.ini) h += '<div class="ini">' + esc(g.ini) + "</div>";
+    for (var i = 0; i < (g.open || 0); i++) h += '<div class="open">+</div>';
+    return h + "</div>";
+  }
+
+  function swipeView(){
+    var top = '<div class="app-top"><div class="app-logo"><b>room</b><i>8</i></div>' +
+      '<div style="display:flex; align-items:center; gap:18px"><div class="seg">' +
+      '<button type="button" data-seg="people" class="' + (state.seg === "people" ? "on" : "") + '">People</button>' +
+      '<button type="button" data-seg="groups" class="' + (state.seg === "groups" ? "on" : "") + '">Groups</button>' +
+      "</div>" + ICON.sliders + "</div></div>";
+
+    if (state.seg === "people"){
+      return top + '<div class="empty">' + ICON.doorway +
+        "<h3>Households come first</h3>" +
+        "<p>room8 places you in a home before it introduces you to anyone. People browsing opens once you have joined a group.</p>" +
+        '<div class="acts"><button type="button" style="background:var(--basalt); color:var(--chalk)" data-act="back-groups">Back to groups</button></div></div>';
+    }
+
+    var l = DECK[state.deck];
+    if (!l){
+      return top + '<div class="empty">' + ICON.doorway +
+        "<h3>No groups in Wedding yet</h3>" +
+        "<p>Widen your area, or start a household of your own and let people find you.</p>" +
+        '<div class="acts">' +
+        '<button type="button" style="background:var(--basalt); color:var(--chalk)" data-act="widen">Widen my area</button>' +
+        '<button type="button" style="border:1px solid var(--hair-2)" data-act="start">Start a group</button>' +
+        "</div></div>";
+    }
+
+    var cards = "";
+    if (DECK[state.deck + 1]) cards += cardHTML(DECK[state.deck + 1], false);
+    cards += cardHTML(l, true);
+
+    return top +
+      '<div class="deck"><div class="deck-ghost"></div>' + cards + "</div>" +
+      '<div class="deck-actions">' +
+      '<button type="button" class="pass" data-act="pass">Pass</button>' +
+      '<button type="button" class="yes" data-act="yes">Interested</button></div>';
+  }
+
+  function cardHTML(l, isTop){
+    var bells = l.members.map(function(m){ return '<img src="' + IMG[m] + '" alt="' + esc(NAME[m]) + '">'; }).join("");
+    for (var i = 0; i < l.open; i++) bells += '<div class="open">+</div>';
+
+    var traits = l.traits.map(function(t){
+      return '<span class="t' + (t[1] ? " hit" : "") + '">' + esc(t[0]) + "</span>";
+    }).join('<span class="sep">&middot;</span>');
+
+    return '<article class="card ' + (isTop ? "top" : "behind") + '"' +
+      (isTop ? ' data-card' : ' style="transform:scale(.965) translateY(10px)"') + ">" +
+      '<div class="card-photo"><img src="' + IMG[l.photo] + '" alt="Room at ' + esc(l.name) + '">' +
+      '<div class="doorbells">' + bells + "</div>" +
+      '<div class="stamp yes" data-yes><span class="pill">Interested</span></div>' +
+      '<div class="stamp no" data-no><span class="pill">Pass</span></div></div>' +
+      '<div class="card-body"><h3 class="card-title">' + esc(l.name) + "</h3>" +
+      '<div class="meta" style="margin-top:5px">' + esc(l.hood) + " &middot; " + esc(l.from) + " &middot; " +
+        (l.spots === 1 ? "1 spot left" : l.spots + " spots left") + "</div>" +
+      '<div class="rent"><b class="tnum">&euro;' + l.rent + '</b><span class="meta">each, warm rent</span></div>' +
+      '<div class="traits">' + traits + "</div>" +
+      '<p class="card-note">' + esc(l.note) + "</p></div></article>";
+  }
+
+  function groupsView(){
+    if (state.detail) return detailView();
+
+    var rows = GROUPS.map(function(g){
+      var sub = g.hood + " · " + g.from + (g.status ? " · " + g.status : "");
+      var badge = g.badge ? '<div style="margin-top:4px"><span class="badge">' + esc(g.badge) + "</span></div>"
+        : (g.asked ? '<div style="margin-top:4px"><span class="badge quiet">Asked to join</span></div>' : "");
+      return '<button type="button" class="g-row" data-group="' + g.id + '">' +
+        '<img class="thumb" src="' + IMG[g.photo] + '" alt="Room at ' + esc(g.name) + '">' +
+        '<div class="g-main"><div class="g-name">' + esc(g.name) + "</div>" +
+        '<div class="meta" style="margin-top:4px">' + esc(sub) + "</div>" + badge +
+        '<div class="g-foot">' + faces(g) + '<span class="g-rent tnum">&euro;' + g.rent + "</span></div>" +
+        "</div></button>";
+    }).join("");
+
+    return '<div class="app-scroll" style="padding-top:24px">' +
+      '<div style="display:flex; align-items:flex-end; justify-content:space-between; padding-bottom:14px">' +
+      '<h2 class="h-screen" style="margin:0">Groups</h2>' +
+      '<button type="button" style="font-size:13px; font-weight:700; color:var(--door); padding-bottom:6px" data-act="start">Start a group</button></div>' +
+      rows +
+      '<div class="housed"><span>Okerstraße 3 &middot; housed in June</span>' + ICON.chev + "</div>" +
+      '<div style="height:16px"></div></div>';
+  }
+
+  function detailView(){
+    var g = GROUPS.filter(function(x){ return x.id === state.detail; })[0];
+    if (!g) { state.detail = null; return groupsView(); }
+    var d = g.detail || (g.detail = makeDetail(g));
+
+    var members = g.members.map(function(m){
+      return '<div class="member"><img src="' + IMG[m] + '" alt=""><div class="who"><b>' + esc(NAME[m]) +
+        '</b><span class="meta">' + esc((g.roles && g.roles[m]) || "Joined recently") + "</span></div></div>";
+    }).join("");
+
+    if (d.pending){
+      var p = d.pending;
+      members += '<div class="member"><img src="' + IMG[p.who] + '" alt=""><div class="who"><b>' + esc(NAME[p.who]) +
+        '</b><span class="meta">' + esc(p.label) + "</span></div>" +
+        (p.answered
+          ? '<span class="answer done">Approved</span>'
+          : '<button type="button" class="answer" data-answer="' + g.id + '">Answer</button>') +
+        "</div>";
+    }
+
+    var pct = Math.round(d.ready / d.readyOf * 100);
+
+    return '<div class="d-hero"><img src="' + IMG[g.photo] + '" alt="Room at ' + esc(g.name) + '">' +
+      '<button type="button" class="back" data-back aria-label="Back to groups">' + ICON.back + "</button></div>" +
+      '<div class="app-scroll">' +
+      '<div class="d-head"><div><h2 class="h-screen" style="font-size:30px; margin:0">' + esc(g.name) + "</h2>" +
+      '<div class="meta" style="margin-top:5px">' + esc(g.hood + " · " + g.from + (g.status ? " · " + g.status : "")) + "</div></div>" +
+      '<div style="text-align:right; white-space:nowrap"><span class="g-rent tnum" style="font-size:24px">&euro;' + g.rent +
+      '</span> <span class="meta">each</span></div></div>' +
+
+      '<div class="sect" style="border-top:0; padding-top:18px"><p class="label" style="color:var(--grey); margin:0 0 4px">Members</p>' +
+      members + "</div>" +
+
+      '<div class="sect"><p class="label" style="color:var(--grey); margin:0 0 8px">House agreement</p>' +
+      '<p style="margin:0; font-size:15px; line-height:1.5">' + esc(d.agreement) + "</p>" +
+      '<p style="margin:8px 0 0; font-size:14px; font-weight:700; color:var(--door)">' + esc(d.agreed) + "</p></div>" +
+
+      '<div class="sect"><div class="sect-h"><span class="label">Application readiness</span>' +
+      '<b class="tnum" style="font-size:15px">' + d.ready + " of " + d.readyOf + "</b></div>" +
+      '<div class="bar"><i style="width:' + pct + '%"></i></div>' +
+      '<p style="margin:10px 0 0; font-size:14px; color:var(--slate)">' +
+        (d.ready >= d.readyOf ? "Everything the landlord asked for is in." : "Missing: " + esc(d.missing)) + "</p></div>" +
+
+      '<div class="sect"><div class="msg" style="padding:6px 0"><img src="' + IMG[d.chatBy] + '" alt="">' +
+      '<div style="flex:1; min-width:0"><b style="font-size:15px">Group chat</b>' +
+      '<div class="meta" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(d.chat) + "</div></div>" +
+      '<span class="meta">' + esc(d.chatAt) + "</span></div></div>" +
+      '<div style="height:16px"></div></div>';
+  }
+
+  function progressView(){
+    var tabs = [["apps","Applications"],["chats","Conversations"],["views","Viewings"]];
+    var head = '<div class="app-scroll" style="padding-top:24px">' +
+      '<h2 class="h-screen" style="margin:0">In progress</h2>' +
+      '<div class="ptabs">' + tabs.map(function(t){
+        return '<button type="button" data-ptab="' + t[0] + '" class="' + (state.ptab === t[0] ? "on" : "") + '">' + t[1] + "</button>";
+      }).join("") + "</div>";
+
+    var body = "";
+    if (state.ptab === "apps"){
+      body += APPS.map(function(a){
+        return '<div class="a-row"><img src="' + IMG[a.photo] + '" alt="">' +
+          '<div style="flex:1; min-width:0; display:flex; flex-direction:column"><div class="a-name">' + esc(a.name) + "</div>" +
+          '<div class="meta" style="margin-top:4px">' + esc(a.sent) + "</div>" +
+          '<div style="margin-top:auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap">' +
+          '<span class="status ' + a.state + '">' + esc(a.tag) + "</span>" +
+          (a.extra ? '<b style="font-size:14px">' + esc(a.extra) + "</b>" : "") +
+          "</div></div></div>";
+      }).join("");
+      body += '<p class="label" style="color:var(--grey); margin:22px 0 2px">Latest messages</p>' +
+        CHATS.slice(0, 2).map(msgRow).join("");
+    } else if (state.ptab === "chats"){
+      body += '<div style="padding-top:8px">' + CHATS.map(msgRow).join("") + "</div>";
+    } else {
+      body += VIEWINGS.map(function(v){
+        return '<div class="a-row"><img src="' + IMG[v.photo] + '" alt="">' +
+          '<div style="flex:1; min-width:0; display:flex; flex-direction:column"><div class="a-name">' + esc(v.name) + "</div>" +
+          '<div class="meta" style="margin-top:4px">' + esc(v.who) + "</div>" +
+          '<div style="margin-top:auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap">' +
+          '<span class="status ' + v.state + '">' + esc(v.tag) + '</span><b style="font-size:14px">' + esc(v.when) + "</b>" +
+          "</div></div></div>";
+      }).join("");
+      body += '<p class="meta" style="margin-top:20px">Viewings you accept are added to your calendar and shared with the group.</p>';
+    }
+    return head + body + '<div style="height:16px"></div></div>';
+  }
+
+  function msgRow(c){
+    return '<div class="msg"><img src="' + IMG[c.who] + '" alt="">' +
+      '<div style="flex:1; min-width:0"><b style="font-size:15px">' + esc(c.title) + "</b>" +
+      '<div class="meta" style="white-space:nowrap; overflow:hidden; text-overflow:ellipsis">' + esc(c.line) + "</div></div>" +
+      '<span class="meta">' + esc(c.at) + "</span></div>";
+  }
+
+  function profileView(){
+    return '<div class="app-scroll" style="padding-top:20px">' +
+      '<div class="p-head"><img src="' + IMG.aimee + '" alt="Aimee Bruns">' +
+      '<div><h2 class="h-screen" style="margin:0; font-size:32px">Aimee Bruns</h2>' +
+      '<div class="verified" style="margin-top:6px">' + ICON.check + "Verified <span class='meta'>&middot; 28 &middot; UX writer</span></div></div></div>" +
+
+      '<p style="font-size:16px; color:var(--slate); margin:20px 0 0; line-height:1.5">' +
+      "&ldquo;I cook a lot and keep my weekdays quiet. English and German, B1.&rdquo;</p>" +
+
+      '<div class="sect" style="margin-top:16px"><div class="sect-h"><span class="label">Preferences</span>' +
+      '<span class="meta">Used for matching</span></div>' +
+      '<p style="margin:12px 0 0; font-size:15px; line-height:1.6">' +
+      '<b style="color:var(--terra)">Tidy-ish</b> &middot; <b style="color:var(--terra)">quiet weekdays</b> &middot; non-smoking &middot; guests with a heads-up &middot; works from home twice a week</p>' +
+      '<p style="margin:10px 0 0; font-size:15px">Up to <b class="tnum">&euro;750</b> each &middot; from 1 Oct &middot; group of 3 to 4</p></div>' +
+
+      '<div class="sect"><div class="sect-h"><span class="label" style="display:flex; align-items:center; gap:7px">' +
+      ICON.lock + "Documents &mdash; private</span>" +
+      '<b class="tnum" style="font-size:15px">3 of 5</b></div>' +
+      '<div class="bar"><i style="width:60%"></i></div>' +
+      '<p style="margin:10px 0 0; font-size:14px; color:var(--slate)">Shared only inside an application you approve. Missing: proof of income, landlord reference.</p></div>' +
+
+      '<div class="row-link"><span>Notifications</span>' +
+      '<button type="button" class="toggle' + (state.notif ? "" : " off") + '" data-toggle role="switch" aria-checked="' +
+      (state.notif ? "true" : "false") + '" aria-label="Notifications"><i></i></button></div>' +
+      '<div class="row-link"><span>Blocked users</span>' + ICON.chev + "</div>" +
+      '<div class="row-link"><span>Export my data</span>' + ICON.chev + "</div>" +
+      '<div class="row-link"><span style="color:var(--terra)">Delete account</span></div>' +
+      '<div style="height:16px"></div></div>';
+  }
+
+  /* ------------------------------------------------------------- render */
+  function render(){
+    var view = state.tab === "swipe" ? swipeView()
+      : state.tab === "groups" ? groupsView()
+      : state.tab === "progress" ? progressView()
+      : profileView();
+    screenEl.innerHTML = view + tabbar() + '<div class="toast" id="toast"></div>';
+    if (state.tab === "swipe" && state.seg === "groups" && DECK[state.deck]) bindDeck();
+  }
+
+  var toastTimer = null;
+  function toast(html){
+    var el = document.getElementById("toast");
+    if (!el) return;
+    el.innerHTML = html;
+    requestAnimationFrame(function(){ el.classList.add("show"); });
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ el.classList.remove("show"); }, 2600);
+  }
+
+  /* ------------------------------------------------------- swipe gesture */
+  var flying = false;
+
+  function phoneScale(){
+    var v = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--ps"));
+    return v > 0 ? v : 1;
+  }
+
+  function bindDeck(){
+    var card = screenEl.querySelector("[data-card]");
+    if (!card) return;
+    var yes = card.querySelector("[data-yes]");
+    var no = card.querySelector("[data-no]");
+    var sx = 0, sy = 0, dx = 0, dy = 0, on = false, pid = null, ps = 1;
+
+    card.addEventListener("pointerdown", function(e){
+      if (flying || e.button) return;
+      on = true; pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0; ps = phoneScale();
+      card.classList.add("drag"); card.classList.remove("settle");
+      try { card.setPointerCapture(pid); } catch (err) {}
+    });
+
+    card.addEventListener("pointermove", function(e){
+      if (!on || e.pointerId !== pid) return;
+      dx = (e.clientX - sx) / ps;
+      dy = (e.clientY - sy) / ps;
+      card.style.transform = "translate(" + dx + "px," + (dy * 0.24) + "px) rotate(" + (dx / 24) + "deg)";
+      var t = Math.min(Math.abs(dx) / 90, 1);
+      yes.style.opacity = dx > 0 ? t : 0;
+      no.style.opacity = dx < 0 ? t : 0;
+    });
+
+    function release(e){
+      if (!on || (e && e.pointerId !== pid)) return;
+      on = false;
+      card.classList.remove("drag");
+      try { card.releasePointerCapture(pid); } catch (err) {}
+      if (Math.abs(dx) > 88){ fly(dx > 0 ? 1 : -1); return; }
+      card.classList.add("settle");
+      card.style.transform = "";
+      yes.style.opacity = 0;
+      no.style.opacity = 0;
+    }
+    card.addEventListener("pointerup", release);
+    card.addEventListener("pointercancel", release);
+  }
+
+  function fly(dir){
+    if (flying) return;
+    var l = DECK[state.deck];
+    if (!l) return;
+    flying = true;
+    var card = screenEl.querySelector("[data-card]");
+    if (card){
+      var stamp = card.querySelector(dir > 0 ? "[data-yes]" : "[data-no]");
+      if (stamp) stamp.style.opacity = 1;
+      card.classList.remove("settle");
+      card.classList.add("gone");
+      card.style.transform = "translate(" + (dir * 520) + "px,40px) rotate(" + (dir * 22) + "deg)";
+    }
+    setTimeout(function(){
+      state.deck++;
+      if (dir > 0) join(l);
+      render();
+      flying = false;
+      if (dir > 0) toast("Asked to join <b>" + esc(l.name) + "</b> — " + esc(l.contact) + " answers for the household.");
+      else toast("Passed on " + esc(l.name) + ". You will not see it again.");
+    }, card ? 300 : 0);
+  }
+
+  function join(l){
+    var existing = GROUPS.filter(function(g){ return g.id === l.id; })[0];
+    if (existing){ existing.asked = true; existing.badge = ""; existing.status = ""; return; }
+    var g = {
+      id:l.id, name:l.name, hood:l.hood, from:l.from, status:"", badge:"", asked:true,
+      rent:l.rent, photo:l.photo, members:l.members.slice(), open:Math.max(0, l.open - 1), ini:null,
+      roles:{}, detail:null
+    };
+    g.roles[l.members[0]] = "Contact person";
+    g.detail = {
+      agreement:"Weekly cleaning rota · quiet after 22:00 · guests with a heads-up · non-smoking",
+      agreed:"Agreed by the household",
+      ready:2, readyOf:6,
+      missing:"Your income proof, a landlord reference and a Schufa.",
+      chatBy:l.members[0], chat:l.contact + ": Thanks for asking — we answer on Sunday.", chatAt:"now",
+      pending:{ who:"aimee", label:"You asked to join" }
+    };
+    GROUPS.unshift(g);
+  }
+
+  /* ------------------------------------------------------------- events */
+  screenEl.addEventListener("click", function(e){
+    var t = e.target.closest("[data-tab],[data-seg],[data-group],[data-back],[data-ptab],[data-act],[data-toggle],[data-answer]");
+    if (!t) return;
+
+    if (t.hasAttribute("data-tab")){ state.tab = t.getAttribute("data-tab"); state.detail = null; render(); return; }
+    if (t.hasAttribute("data-seg")){ state.seg = t.getAttribute("data-seg"); render(); return; }
+    if (t.hasAttribute("data-group")){ state.detail = t.getAttribute("data-group"); render(); return; }
+    if (t.hasAttribute("data-back")){ state.detail = null; render(); return; }
+    if (t.hasAttribute("data-ptab")){ state.ptab = t.getAttribute("data-ptab"); render(); return; }
+    if (t.hasAttribute("data-toggle")){
+      state.notif = !state.notif; render();
+      toast(state.notif ? "Notifications on." : "Notifications off — you will still see answers in the app.");
+      return;
+    }
+    if (t.hasAttribute("data-answer")){
+      var g = GROUPS.filter(function(x){ return x.id === t.getAttribute("data-answer"); })[0];
+      if (g && g.detail && g.detail.pending){
+        g.detail.pending.answered = true;
+        g.detail.pending.label = "Joined just now";
+        g.open = Math.max(0, g.open - 1);
+        g.detail.ready = Math.min(g.detail.readyOf, g.detail.ready + 1);
+        render();
+        toast("<b>" + esc(NAME[g.detail.pending.who]) + "</b> is in. The household is full.");
+      }
+      return;
+    }
+
+    var act = t.getAttribute("data-act");
+    if (act === "pass") fly(-1);
+    else if (act === "yes") fly(1);
+    else if (act === "widen"){ state.deck = 0; render(); toast("Area widened to <b>Mitte, Wedding and Prenzlauer Berg</b>."); }
+    else if (act === "start"){ toast("Starting a household — invite two people and pick a district."); }
+    else if (act === "back-groups"){ state.seg = "groups"; render(); }
+  });
+
+  document.addEventListener("keydown", function(e){
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    if (state.tab !== "swipe" || state.seg !== "groups") return;
+    var tag = (document.activeElement && document.activeElement.tagName) || "";
+    if (tag === "INPUT" || tag === "TEXTAREA") return;
+    var box = screenEl.getBoundingClientRect();
+    if (box.bottom < 80 || box.top > window.innerHeight - 80) return;
+    e.preventDefault();
+    fly(e.key === "ArrowRight" ? 1 : -1);
+  });
+
+  render();
+
+  /* -------------------------------------------------------- page chrome */
+  var nav = document.getElementById("nav");
+  var onScroll = function(){ nav.classList.toggle("stuck", window.scrollY > 8); };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive:true });
+
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+      });
+    }, { rootMargin:"0px 0px -8% 0px", threshold:0.06 });
+    Array.prototype.forEach.call(document.querySelectorAll(".rev"), function(el){ io.observe(el); });
+  } else {
+    Array.prototype.forEach.call(document.querySelectorAll(".rev"), function(el){ el.classList.add("in"); });
+  }
+
+  /* ---------------------------------------------------------- lightbox */
+  var lb = document.getElementById("lb");
+  var lbImg = document.getElementById("lb-img");
+  var lastFocus = null;
+  function openLb(src, alt){
+    lastFocus = document.activeElement;
+    lbImg.src = src; lbImg.alt = alt || "";
+    lb.classList.add("open");
+    document.getElementById("lb-close").focus();
+  }
+  function closeLb(){
+    lb.classList.remove("open"); lbImg.removeAttribute("src");
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  document.getElementById("gallery").addEventListener("click", function(e){
+    var img = e.target.closest(".shot img");
+    if (img) openLb(img.src, img.alt);
+  });
+  lb.addEventListener("click", function(e){ if (e.target !== lbImg) closeLb(); });
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape" && lb.classList.contains("open")) closeLb(); });
+
+  /* ---------------------------------------------------------- waitlist */
+  document.getElementById("waitlist").addEventListener("submit", function(e){
+    e.preventDefault();
+    var v = document.getElementById("email").value.trim();
+    var note = document.getElementById("wl-note");
+    note.textContent = v && v.indexOf("@") > 0
+      ? "Preview only — nothing was sent or stored. On the real site this is where the invite would be queued."
+      : "Add an email address to see what happens — this preview still sends nothing anywhere.";
+  });
+})();
+</script>

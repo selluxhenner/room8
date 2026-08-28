@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'DM Sans', 'Segoe UI', system-ui, sans-serif; }
+    a { color: #2F5D50; } a:hover { color: #20211E; }
+  </style>
+</helmet>
+<div style="width: 375px; height: 812px; background: #F6F1E9; color: #20211E; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 20px 12px 20px;">
+    <div style="display: flex; align-items: baseline; gap: 2px;">
+      <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.05em; font-size: 24px;">room</span>
+      <span style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.05em; font-size: 28px; color: #2F5D50;">8</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px;">
+      <div style="display: flex; align-items: baseline; gap: 14px;">
+        <span style="font-size: 14px; color: #98A6A2;">People</span>
+        <span style="font-size: 14px; font-weight: 700; border-bottom: 2px solid #2F5D50; padding-bottom: 3px;">Groups</span>
+      </div>
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#20211E" stroke-width="1.8" stroke-linecap="round"><line x1="4" y1="7" x2="20" y2="7"></line><circle cx="9" cy="7" r="2.4" fill="#F6F1E9"></circle><line x1="4" y1="15" x2="20" y2="15"></line><circle cx="15" cy="15" r="2.4" fill="#F6F1E9"></circle></svg>
+    </div>
+  </div>
+
+  <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 44px;">
+    <svg width="76" height="76" viewBox="0 0 48 48" fill="none" stroke="#98A6A2" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="12" y="7" width="24" height="34" rx="3"></rect>
+      <rect x="26" y="23" width="6" height="10" rx="1.5"></rect>
+      <circle cx="30.5" cy="19" r="1.3" fill="#98A6A2" stroke="none"></circle>
+      <path d="M10 41 L38 41" stroke-dasharray="3 3"></path>
+    </svg>
+    <div style="font-family: 'Fraunces', Georgia, serif; font-weight: 600; letter-spacing: -0.05em; font-size: 26px; margin-top: 24px; line-height: 1.2;">No groups in Wedding yet</div>
+    <div style="font-size: 15px; line-height: 1.5; color: #6E7C77; margin-top: 10px;">Widen your area, or start a household of your own and let people find you.</div>
+    <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 28px; width: 100%; max-width: 230px;">
+      <div style="height: 48px; border-radius: 12px; background: #20211E; color: #FFFCF7; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">Widen my area</div>
+      <div style="height: 48px; border-radius: 12px; border: 1px solid rgba(152, 166, 162, 0.6); color: #20211E; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700;">Start a group</div>
+    </div>
+  </div>
+
+  <div style="display: flex; align-items: stretch; height: 72px; border-top: 1px solid rgba(152, 166, 162, 0.35); padding-bottom: 10px;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #2F5D50;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="7.2" r="4.2" pathLength="100" stroke-dasharray="86 14"></circle><circle cx="12" cy="16.4" r="5.2"></circle></svg>
+      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Swipe</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #98A6A2;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="8.5" width="5.4" height="7" rx="1.8"></rect><rect x="9.8" y="8.5" width="5.4" height="7" rx="1.8"></rect><rect x="16.6" y="8.5" width="4.4" height="7" rx="1.8" stroke-dasharray="2.5 2.5"></rect></svg>
+      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Groups</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #98A6A2;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3.5 11.5 L20.5 4.5 L14.5 20 L11 13.5 Z"></path><path d="M11 13.5 L20.5 4.5"></path></svg>
+      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">In progress</span>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: #98A6A2;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8.2" r="3.6"></circle><path d="M5 19.5 C6.2 15.8 8.8 14.2 12 14.2 C15.2 14.2 17.8 15.8 19 19.5"></path></svg>
+      <span style="font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;">Profile</span>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

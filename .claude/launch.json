@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "room8-preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8756",
+        "--directory",
+        "site"
+      ],
+      "port": 8756
+    }
+  ]
+}
